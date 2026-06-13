@@ -9,4 +9,4 @@ authRouter.post("/googlesignup",googleSignup)
 
 authRouter.get("/logout",logOut)
 
-export default authRouter
+export default authRouter 
