@@ -36,4 +36,4 @@ export const askAI = async (messages) => {
     console.error("OpenRouter Error:", error.response?.data || error.message);
     throw new Error("OpenRouter API Error");
   }
-};
+}; 
