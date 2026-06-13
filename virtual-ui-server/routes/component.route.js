@@ -16,4 +16,4 @@ componentRouter.post("/publish", isAuth, publishComponent);
 
 componentRouter.get("/all-components" , isAuth , getAllComponents)
 
-export default componentRouter;
+export default componentRouter
