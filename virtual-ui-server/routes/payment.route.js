@@ -11,4 +11,4 @@ paymentRouter.post("/order" , isAuth , createOrder )
 paymentRouter.post("/verify" , isAuth , verifyPayment )
 
 
-export default paymentRouter
+export default paymentRouter 
