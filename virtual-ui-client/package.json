@@ -13,7 +13,7 @@
     "@codesandbox/sandpack-react": "^2.20.0",
     "@reduxjs/toolkit": "^2.11.2",
     "@tailwindcss/vite": "^4.2.1",
-    "axios": "^1.13.6",
+    "axios": "^1.13.6", 
     "firebase": "^12.10.0",
     "motion": "^12.35.2",
     "react": "^19.2.0",
