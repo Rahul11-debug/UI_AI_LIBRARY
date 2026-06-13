@@ -220,7 +220,7 @@ export const publishComponent = async (req, res) => {
       componentDir,
       `${component.name}.jsx`
     );
-
+ 
     const indexFile = path.join(libPath, "src/index.js");
 
     // create component folder
