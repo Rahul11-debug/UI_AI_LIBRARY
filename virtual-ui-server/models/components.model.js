@@ -13,7 +13,7 @@ const componentSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
   },
-
+ 
   visibility: {
     type: String,
     enum: ["private", "public"],
