@@ -12,4 +12,4 @@ userRouter.get("/all-users",getAllUsers)
 
 
 
-export default userRouter
+export default userRouter 
