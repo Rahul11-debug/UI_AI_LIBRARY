@@ -13,7 +13,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:5173", 
+    origin: "https://ui-library-b0wu.onrender.com", 
     credentials: true,               
   }) 
 );
