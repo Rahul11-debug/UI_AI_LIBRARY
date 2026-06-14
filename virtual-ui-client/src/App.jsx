@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -24,7 +24,6 @@ function App() {
 
   const [authChecked, setAuthChecked] = useState(false);
 
-  // ✅ Auth check (NON-BLOCKING)
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -32,9 +31,10 @@ function App() {
           `${ServerUrl}/api/user/currentuser`,
           { withCredentials: true }
         );
+
         dispatch(setUserData(res.data));
       } catch (error) {
-        dispatch(setUserData(null)); // guest user
+        dispatch(setUserData(null));
       } finally {
         setAuthChecked(true);
       }
@@ -43,7 +43,6 @@ function App() {
     fetchUser();
   }, [dispatch]);
 
-  // ✅ Fetch extra data ONLY if admin/user exists
   useEffect(() => {
     if (!userData) return;
 
@@ -69,25 +68,32 @@ function App() {
     fetchExtraData();
   }, [userData, dispatch]);
 
-  // ❌ REMOVE full screen loader
-  // ✔️ Instead allow render immediately
+  if (!authChecked) {
+    return (
+      <div className="h-screen flex items-center justify-center">
+        Loading...
+      </div>
+    );
+  }
 
   return (
-    <>
-      {/* Optional: small top loader */}
-      {!authChecked && (
-        <div className="fixed top-0 left-0 w-full h-1 bg-purple-500 animate-pulse z-50" />
-      )}
+    <Routes>
+      <Route path="/" element={<Home />} />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/generate" element={<ComponentGenerator />} />
-        <Route path="/pricing" element={<PricingPage />} />
-        <Route path="/component" element={<ComponentsPage />} />
-        <Route path="/my-components" element={<MyComponentsPage />} />
-      </Routes>
-    </>
+      <Route
+        path="/admin"
+        element={
+          userData?.role === "admin"
+            ? <AdminDashboard />
+            : <Navigate to="/" replace />
+        }
+      />
+
+      <Route path="/generate" element={<ComponentGenerator />} />
+      <Route path="/pricing" element={<PricingPage />} />
+      <Route path="/component" element={<ComponentsPage />} />
+      <Route path="/my-components" element={<MyComponentsPage />} />
+    </Routes>
   );
 }
 
